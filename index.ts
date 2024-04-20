@@ -1,0 +1,48 @@
+
+import inquirer from "inquirer";
+
+let myBalance = 20000; //Dollar
+let myPin = 3404;
+let pinAnswer = await inquirer.prompt(
+    [
+    {
+        name: "pin",
+        message: "enter your pin",
+        type: "number",
+    }
+]
+);
+if(pinAnswer.pin===myPin){
+    console.log("Correct Pin Code!!");
+    let operationAns = await inquirer.prompt(
+        [
+           {
+            name:"operation",
+            message:"please select option",
+            type: "list",
+            choices: ["Withdraw", "Check Balance"]
+
+           } 
+        ]
+    );
+    if(operationAns.operation === "Withdraw"){
+        let amountAns = await inquirer.prompt(
+            [
+                {
+                    name: "amount",
+                    message: "enter your amount",
+                    type:"number",
+                }
+            ]
+        );
+        myBalance -=amountAns.amount;
+        console.log("your remaining balance is:" + myBalance);
+        
+    } else if (operationAns.operation ==="check balance")
+        console.log("your balance is :" + myBalance);
+        
+}
+else {
+    console.log("Incorrect Pin Code");
+    
+}
